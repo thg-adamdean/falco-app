@@ -1,9 +1,9 @@
-[![CircleCI](https://circleci.com/gh/giantswarm/{APP-NAME}-app.svg?style=shield)](https://circleci.com/gh/giantswarm/{APP-NAME}-app)
+[![CircleCI](https://circleci.com/gh/giantswarm/falco-app.svg?style=shield)](https://circleci.com/gh/giantswarm/falco-app)
 
-# {APP-NAME} chart
+# falco chart
 
-Giant Swarm offers a {APP-NAME} App which can be installed in workload clusters.
-Here we define the {APP-NAME} chart with its templates and default configuration.
+Giant Swarm offers a falco App which can be installed in workload clusters.
+Here we define the falco chart with its templates and default configuration.
 
 **What is this app?**
 **Why did we add it?**
