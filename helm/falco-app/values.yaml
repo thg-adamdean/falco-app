@@ -1,15 +1,2 @@
-# TEMPLATE-APP: This is set as a reasonable default, feel free to change.
-
-name: falco
-namespace: kube-system
-serviceType: managed
-
-project:
-  branch: "[[ .Branch ]]"
-  commit: "[[ .SHA ]]"
-
-image:
+global:
   registry: quay.io
-  name: giantswarm/falco
-  tag: v0.0.1
-  pullPolicy: IfNotPresent
