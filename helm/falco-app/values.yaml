@@ -9,7 +9,7 @@ falco:
   falco:
     grpc:
       enabled: true
-    grpc_output:
+    grpcOutput:
       enabled: true
 
 falco-exporter:
