@@ -9,6 +9,8 @@ falco:
   falco:
     grpc:
       enabled: true
+    grpc_output:
+      enabled: true
 
 falco-exporter:
   podSecurityPolicy:
