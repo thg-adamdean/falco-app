@@ -6,6 +6,9 @@ falco:
     create: true
   serviceAccount:
     name: falco-user
+  falco:
+    grpc:
+      enabled: true
 
 falco-exporter:
   podSecurityPolicy:
