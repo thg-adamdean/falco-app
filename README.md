@@ -24,7 +24,51 @@ There are 3 ways to install this app onto a workload cluster.
 ```
 # values.yaml
 
+global:
+  registry: quay.io
+
+falco:
+  podSecurityPolicy:
+    create: true
+  serviceAccount:
+    name: falco-user
+  falco:
+    grpc:
+      enabled: true
+    grpcOutput:
+      enabled: true
+  customRules:
+    {}
+    # Example:
+    #
+    # rules-traefik.yaml: |-
+    #   [ rule body ]
+
+
+falco-exporter:
+  podSecurityPolicy:
+    create: true
+  serviceAccount:
+    name: falco-user
+
+falcosidekick:
+
 ```
+
+#### Falco Configurations
+
+Please see the below page for configurable values. 
+[Falco Configuration](helm/falco-app/charts/falco#configuration)
+
+#### Falco Exporter Configurations
+
+Please see the below page for configurable values. 
+[Falco Exporter Configuration](helm/falco-app/charts/falco-exporter#configuration)
+
+#### Falco sidekick Configurations
+
+Please see the below page for configurable values. 
+[Falco sidekick Configuration](helm/falco-app/charts/falcosidekick#configuration)
 
 ### Sample App CR and ConfigMap for the management cluster
 If you have access to the Kubernetes API on the management cluster, you could create
