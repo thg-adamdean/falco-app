@@ -2,7 +2,7 @@
 
 # falco chart
 
-Giant Swarm offers a falco App which can be installed in workload clusters.
+Giant Swarm offers a [falco](https://falco.org/) App which can be installed in workload clusters.
 Here we define the falco chart with its templates and default configuration.
 
 **What is this app?**
@@ -57,17 +57,17 @@ falcosidekick:
 
 #### Falco Configurations
 
-Please see the below page for configurable values. 
+Please see the below page for configurable values.
 [Falco Configuration](helm/falco-app/charts/falco#configuration)
 
 #### Falco Exporter Configurations
 
-Please see the below page for configurable values. 
+Please see the below page for configurable values.
 [Falco Exporter Configuration](helm/falco-app/charts/falco-exporter#configuration)
 
 #### Falco sidekick Configurations
 
-Please see the below page for configurable values. 
+Please see the below page for configurable values.
 [Falco sidekick Configuration](helm/falco-app/charts/falcosidekick#configuration)
 
 ### Sample App CR and ConfigMap for the management cluster
@@ -105,4 +105,4 @@ Not following these limitations will most likely result in a broken deployment.
 
 ## Credit
 
-* {APP HELM REPOSITORY}
+* https://github.com/falcosecurity/charts
