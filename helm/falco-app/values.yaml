@@ -17,3 +17,10 @@ falco-exporter:
     create: true
   serviceAccount:
     name: falco-user
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi

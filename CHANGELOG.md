@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Set `requests` and `limits` for falco-exporter.
+
 ### Changed
 
 - Push `falco-app` to provider collections when tagged.
