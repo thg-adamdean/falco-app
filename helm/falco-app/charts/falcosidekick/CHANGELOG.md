@@ -5,6 +5,28 @@ numbering uses [semantic versioning](http://semver.org).
 
 Before release 0.1.20, the helm chart can be found in `falcosidekick` [repository](https://github.com/falcosecurity/falcosidekick/tree/master/deploy/helm/falcosidekick).
 
+## 0.3.10
+
+### Minor changes
+
+* Fix table formatting in `README.md`
+
+## 0.3.9
+
+### Fixes
+
+* Add missing `imagePullSecrets` in `falcosidekick/templates/deployment-ui.yaml`
+
+## 0.3.8
+
+### Major Changes
+
+* Add `GCP Cloud Run` output
+* Add `GCP Cloud Functions` output
+* Add `Wavefront` output
+* Allow MutualTLS for some outputs
+* Add basic auth for Elasticsearch output
+
 ## 0.3.7
 
 ### Minor changes
@@ -150,8 +172,6 @@ Before release 0.1.20, the helm chart can be found in `falcosidekick` [repositor
 * Update image to use release 2.19.1
 
 ## 0.1.34
-
-
 
 * New outputs can be set : `Kafka`, `AWS CloudWatchLogs`
 

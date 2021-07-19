@@ -2,11 +2,11 @@ apiVersion: v2
 appVersion: 0.0.1
 dependencies:
 - name: falco
-  version: 1.12.0
+  version: 1.15.3
 - name: falco-exporter
   version: 0.5.1
 - name: falcosidekick
-  version: 0.3.7
+  version: 0.3.10
 description: A Helm chart for falco
 engine: gotpl
 home: https://github.com/giantswarm/falco-app
