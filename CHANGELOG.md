@@ -7,4 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Push `falco-app` to provider collections when tagged.
+
 [Unreleased]: https://github.com/giantswarm/REPOSITORY_NAME/tree/master
