@@ -6,7 +6,7 @@ dependencies:
 - name: falco-exporter
   version: 0.5.1
 - name: falcosidekick
-  version: 0.3.10
+  version: 0.3.11
 description: A Helm chart for falco
 engine: gotpl
 home: https://github.com/giantswarm/falco-app
