@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2021-07-22
+
 ### Added
 
 - Set `requests` and `limits` for falco-exporter.
@@ -17,4 +19,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Push `falco-app` to provider collections (except KVM) when tagged.
 - Use Giant Swarm-managed images.
 
-[Unreleased]: https://github.com/giantswarm/REPOSITORY_NAME/tree/master
+[Unreleased]: https://github.com/giantswarm/falco-app/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/giantswarm/falco-app/releases/tag/v0.1.0
