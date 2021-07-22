@@ -15,5 +15,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Update charts to latest upstream versions.
 - Push `falco-app` to provider collections when tagged.
+- Use Giant Swarm-managed images.
 
 [Unreleased]: https://github.com/giantswarm/REPOSITORY_NAME/tree/master
