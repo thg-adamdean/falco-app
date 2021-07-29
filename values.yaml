@@ -3,7 +3,7 @@
 image:
   registry: docker.io
   repository: falcosecurity/falco
-  tag: 0.28.1
+  tag: 0.29.1
   pullPolicy: IfNotPresent
   pullSecrets: []
 
@@ -240,8 +240,19 @@ falco:
     listenPort: 8765
     nodePort: false
     k8sAuditEndpoint: /k8s-audit
+    k8sHealthzEndpoint: /healthz
     sslEnabled: false
     sslCertificate: /etc/falco/certs/server.pem
+
+  livenessProbe:
+    initialDelaySeconds: 60
+    timeoutSeconds: 5
+    periodSeconds: 15
+
+  readinessProbe:
+    initialDelaySeconds: 30
+    timeoutSeconds: 5
+    periodSeconds: 15
 
   # Possible additional things you might want to do with program output:
   #   - send to a slack webhook:
@@ -323,7 +334,9 @@ customRules:
 
 # certificates used by webserver and grpc server
 # paste certificate content or use helm with --set-file
+# or use existing secret containing key, crt, ca as well as pem bundle
 certs:
+  existingSecret: ""
   server:
     key: ""
     crt: ""
@@ -360,5 +373,5 @@ extraVolumeMounts: []
 falcosidekick:
   # enable falcosidekick deployment
   enabled: false
-  fullfdqn: false
+  fullfqdn: false
   # for configuration values, see https://github.com/falcosecurity/charts/blob/master/falcosidekick/values.yaml
