@@ -13,7 +13,7 @@ dependencies:
 description: A Helm chart for falco
 engine: gotpl
 home: https://github.com/giantswarm/falco-app
-icon: https://s.giantswarm.io/app-icons/1/png/default-app-light.png
+icon: https://s.giantswarm.io/app-icons/falco/1/dark.svg
 maintainers:
 - name: Giant Swarm applications team
   url: https://github.com/giantswarm/falco-app
