@@ -3,6 +3,34 @@
 This file documents all notable changes to Falco Helm Chart. The release
 numbering uses [semantic versioning](http://semver.org).
 
+## v1.16.2
+
+* Add `serviceAccount.annotations` configuration
+
+## v1.16.1
+
+* Fixed string escaping for `--k8s-node`
+
+## v1.16.0
+
+* Upgrade to Falco 0.30.0 (see the [Falco changelog](https://github.com/falcosecurity/falco/blob/0.30.0/CHANGELOG.md))
+* Update rulesets from Falco 0.30.0
+* Add `kubernetesSupport.enableNodeFilter` configuration to enable node filtering when requesting pods metadata from Kubernetes
+* Add `falco.metadataDownload` configuration for fine-tuning container orchestrator metadata fetching params
+* Add `falco.jsonIncludeTagsProperty` configuration to include tags in the JSON output
+
+## v1.15.7
+
+* Removed `maxSurge` reference from comment in Falco's `values.yaml` file.
+
+## v1.15.6
+
+* Update `Falcosidekick` chart to 0.3.13
+
+## v1.15.4
+
+* Update `Falcosidekick` chart to 0.3.12
+
 ## v1.15.3
 
 * Upgrade to Falco 0.29.1 (see the [Falco changelog](https://github.com/falcosecurity/falco/blob/0.29.1/CHANGELOG.md))
