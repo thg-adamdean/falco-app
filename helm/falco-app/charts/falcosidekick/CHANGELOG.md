@@ -5,6 +5,67 @@ numbering uses [semantic versioning](http://semver.org).
 
 Before release 0.1.20, the helm chart can be found in `falcosidekick` [repository](https://github.com/falcosecurity/falcosidekick/tree/master/deploy/helm/falcosidekick).
 
+## 0.4.4
+
+* Fix output after chart installation when ingress is enable
+
+## 0.4.3
+
+* Support `annotation` block in service
+
+## 0.4.2
+
+* Fix: Added the rule to use the podsecuritypolicy
+* Fix: Added `ServiceAccountName` to the UI deployment
+
+## 0.4.1
+
+* Removes duplicate `Fission` keys from secret
+
+## 0.4.0
+
+### Major Changes
+
+* Support Ingress API version `networking.k8s.io/v1`, see `ingress.hosts` and `webui.ingress.hosts` in [values.yaml](values.yaml) for a breaking change in the `path` parameter
+
+## 0.3.17
+
+* Fix: Remove the value for bucket of `Yandex S3`, it enabled the output by default
+
+## 0.3.16
+
+### Major Changes
+
+* Fix: set correct new image 2.24.0
+
+## 0.3.15
+
+### Major Changes
+
+* Add `Fission` output
+
+## 0.3.14
+
+### Major Changes
+
+* Add `Grafana` output
+* Add `Yandex Cloud S3` output
+* Add `Kafka REST` output
+
+### Minor changes
+
+* Docker image is now available on AWS ECR Public Gallery (`--set image.registry=public.ecr.aws`)
+
+## 0.3.13
+
+### Minor changes
+
+* Enable extra volumes and volumemounts for `falcosidekick` via values
+
+## 0.3.12
+
+* Add AWS configuration field `config.aws.rolearn`
+
 ## 0.3.11
 
 ### Minor changes

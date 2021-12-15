@@ -306,6 +306,8 @@ config:
 service:
   type: ClusterIP
   port: 2801
+  annotations: {}
+    # networking.gke.io/load-balancer-type: Internal
 
 ingress:
   enabled: false
@@ -314,7 +316,10 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: falcosidekick.local
-      paths: []
+      paths:
+        - path: /
+          # -- pathType (e.g. ImplementationSpecific, Prefix, .. etc.)
+          # pathType: Prefix
 
   tls: []
   #  - secretName: chart-example-tls
@@ -394,7 +399,16 @@ webui:
       # kubernetes.io/tls-acme: "true"
     hosts:
       - host: falcosidekick-ui.local
-        paths: ["/ui", "/events", "/healthz", "/ws"]
+        paths:
+        - path: /ui
+          # -- pathType (e.g. ImplementationSpecific, Prefix, .. etc.)
+          # pathType: Prefix
+        - path: /events
+          # pathType: Prefix
+        - path: /healthz
+          # pathType: Prefix
+        - path: /ws
+          # pathType: Prefix
 
     tls: []
     #  - secretName: chart-example-tls
