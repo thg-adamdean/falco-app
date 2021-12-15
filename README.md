@@ -34,6 +34,7 @@ It works as a single endpoint for as many as you want `Falco` instances :
 - [**DogStatsD**](https://docs.datadoghq.com/developers/dogstatsd/?tab=go) (for monitoring of `falcosidekick`)
 - [**Prometheus**](https://prometheus.io/) (for both events and monitoring of `falcosidekick`)
 - [**Wavefront**](https://www.wavefront.com)
+- [**Grafana**](https://grafana.com/) (annotations)
 
 ### Alerting
 
@@ -50,6 +51,7 @@ It works as a single endpoint for as many as you want `Falco` instances :
 
 - [**AWS S3**](https://aws.amazon.com/s3/features/)
 - [**GCP Storage**](https://cloud.google.com/storage)
+- [**Yandex Cloud S3**](https://cloud.yandex.com/en/services/storage)
 
 ### FaaS / Serverless
 
@@ -58,6 +60,7 @@ It works as a single endpoint for as many as you want `Falco` instances :
 - [**OpenFaaS**](https://www.openfaas.com)
 - [**GCP Cloud Run**](https://cloud.google.com/run)
 - [**GCP Cloud Functions**](https://cloud.google.com/functions)
+- [**Fission**](https://fission.io)
 
 ### Message queue / Streaming
 
@@ -69,6 +72,7 @@ It works as a single endpoint for as many as you want `Falco` instances :
 - [**Apache Kafka**](https://kafka.apache.org/)
 - [**RabbitMQ**](https://www.rabbitmq.com/)
 - [**Azure Event Hubs**](https://azure.microsoft.com/en-in/services/event-hubs/)
+- [**Kafka REST**](https://docs.confluent.io/platform/current/kafka-rest/index.html)
   
 ### Email
 
@@ -207,6 +211,7 @@ The following table lists the main configurable parameters of the Falcosidekick 
 | `config.stan.checkcert`                      | check if ssl certificate of the output is valid  | `true`                                                                                                                                 |                                                                                                   |
 | `config.stan.minimumpriority`               | minimum priority of event for using use this output, order is `emergency\|alert\|critical\|error\|warning\|notice\|informational\|debug or ""`                                                | `debug`                                                                                           |
 | `config.aws.accesskeyid`                    | AWS Access Key Id (optionnal if you use EC2 Instance Profile)                                                                                                                          |                                                                                                   |
+| `config.aws.rolearn`                    | AWS IAM role ARN for falcosidekick service account to associate with (optionnal if you use EC2 Instance Profile)                                                                                                                          |                                                                                                   |
 | `config.aws.secretaccesskey`                | AWS Secret Access Key (optionnal if you use EC2 Instance Profile)                                                                                                                      |                                                                                                   |
 | `config.aws.region`                         | AWS Region (optionnal if you use EC2 Instance Profile)                                                                                                                                 |                                                                                                   |
 | `config.aws.cloudwatchlogs.loggroup`        | AWS CloudWatch Logs Group name, if not empty, CloudWatch Logs output is enabled                                                                                                        |                                                                                                   |
@@ -285,7 +290,7 @@ The following table lists the main configurable parameters of the Falcosidekick 
 | `config.openfaas.minimumpriority`                  | minimum priority of event for using use this output, order is `emergency\|alert\|critical\|error\|warning\|notice\|informational\|debug or ""`                                                | `debug`                                                                                           |
 | `config.cloudevents.address`                       | CloudEvents consumer http address, if not empty, CloudEvents output is *enabled*                                                                                                       |                                                                                                   |
 | `config.cloudevents.extension`                     | Extensions to add in the outbound Event, useful for routing                                                                                                                            |                                                                                                   |
-| `config.cloudevents.minimumpriority`               | minimum priority of event for using use this output, order is `emergency`|alert\|critical\|error\|warning\|notice\|informational\|debug or ""`                                                | `debug`                                                                                           |
+| `config.cloudevents.minimumpriority`               | minimum priority of event for using use this output, order is `emergency\|alert\|critical\|error\|warning\|notice\|informational\|debug or ""`                                                | `debug`                                                                                           |
 | `config.rabbitmq.url`                              | Rabbitmq URL, if not empty, Rabbitmq output is *enabled*                                                                                                       |                                                                                                   |
 | `config.rabbitmq.queue`                     | Rabbitmq Queue name                                                                                                                          |                                                                                                   |
 | `config.rabbitmq.minimumpriority`               | minimum priority of event for using use this output, order is `emergency\|alert\|critical\|error\|warning\|notice\|informational\|debug or ""`                                                | `debug`                                                                                           |
@@ -297,8 +302,47 @@ The following table lists the main configurable parameters of the Falcosidekick 
 | `config.wavefront.batchsize`   | Wavefront batch size. If empty uses the default 10000. Only used when endpointtype is 'direct' | 10000
 | `config.wavefront.flushintervalseconds`   | Wavefront flush interval in seconds. Defaults to 1 | 1
 | `config.wavefront.minimumpriority`  | minimum priority of event for using use this output, order is `emergency\|alert\|critical\|error\|warning\|notice\|informational\|debug or ""`                                                | `debug`                                                                                           |
-| `webui.enabled`                             | enable Falcosidekick-UI                                                                                                                                                                | `false`                                                                                           |
+| `config.grafana.hostport` | http://{domain or ip}:{port}, if not empty, Grafana output is enabled |
+| `config.grafana.apikey` | API Key to authenticate to Grafana, if not empty, Grafana output is enabled |
+| `config.grafana.dashboardid`| annotations are scoped to a specific dashboard. Optionnal. |
+| `config.grafana.panelid` | annotations are scoped to a specific panel. Optionnal. |
+| `config.grafana.allfieldsastags` | if true, all custom fields are added as tags | `false`
+| `config.grafana.mutualtls` | if true, checkcert flag will be ignored (server cert will always be checked) | `false`
+| `config.grafana.checkcert` | check if ssl certificate of the output is valid | `true`
+| `config.grafana.minimumpriority` | minimum priority of event for using this output, order is emergency|alert|critical|error|warning|notice|informational|debug |
+| `config.fission.function` | Name of Fission function, if not empty, Fission is enabled |
+| `config.fission.routernamespace` | Namespace of Fission Router | `fission`
+| `config.fission.routerservice` | Service of Fission Router | `router`
+| `config.fission.routerport` | Port of service of Fission Router | `80`
+| `config.fission.minimumpriority` | minimum priority of event for using this output, order is emergency|alert|critical|error|warning|notice|informational|debug |
+| `config.fission.checkcert` | check if ssl certificate of the output is valid | `true`
+| `config.fission.mutualtls` | if true, checkcert flag will be ignored (server cert will always be checked) | `false`
+| `config.yandex.accesskeyid` |  yandex access key |
+| `config.yandex.secretaccesskey` | yandex secret access key |
+| `config.yandex.region` | yandex storage region| `u-central-1`
+| `config.yandex.s3.endpoint` | yandex storage endpoint (default: https://storage.yandexcloud.net) |
+| `config.yandex.s3.bucket` | Yandex storage, bucket name | `falcosidekick`
+| `config.yandex.s3.prefix` | name of prefix, keys will have format: s3://<bucket>/<prefix>/YYYY-MM-DD/YYYY-MM-DDTHH:mm:ss.s+01:00.json |
+| `config.yandex.s3.minimumpriority` | minimum priority of event for using this output, order is emergency|alert|critical|error |
+| `config.kafkarest.address` | The full URL to the topic (example "http://kafkarest:8082/topics/test") |
+| `config.kafkarest.version` | Kafka Rest Proxy API version 2|1 | `2`
+| `config.kafkarest.minimumpriority` | minimum priority of event for using this output, order is emergency|alert|critical|error|warning|notice|informational|debug |
+| `config.kafkarest.checkcert` | check if ssl certificate of the output is valid | `true`
+| `config.kafkarest.mutualtls` | if true, checkcert flag will be ignored (server cert will always be checked) | `false`
+| `image.registry`                                 | The image registry to pull from                                                                  | `docker.io`                        |
+| `image.repository`                               | The image repository to pull from                                                                | `falcosecurity/falcosidekick`     |
+| `image.tag`                                      | The image tag to pull                                                                            | `2.23.1`                            |
+| `image.pullPolicy`                               | The image pull policy                                                                            | `IfNotPresent`                     |
 | `webui.darkmode`                             | enable Falcosidekick-UI darkmode                                                                                                                                                                | `false`                                                                                           |
+| `webui.enabled`                             | enable Falcosidekick-UI                                                                                                                                                                | `false`                                                                                           |
+| `webui.image.registry`                                 | The web UI image registry to pull from                                                                  | `docker.io`                        |
+| `webui.image.repository`                               | The web UI image repository to pull from                                                                | `falcosecurity/falcosidekick-ui`     |
+| `webui.image.tag`                                      | The web UI image tag to pull                                                                            | `v1.1.0`                            |
+| `webui.image.pullPolicy`                               | The web UI image pull policy                                                                            | `IfNotPresent`                     |
+| `extraVolumes`                               | Extra volumes for sidekick deployment                                                                            |                                  |
+| `extraVolumeMounts`                               | Extra volume mounts for sidekick deployment                                                                            |                                  |
+
+
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 

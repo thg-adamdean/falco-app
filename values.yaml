@@ -5,8 +5,9 @@
 replicaCount: 2
 
 image:
+  registry: docker.io
   repository: falcosecurity/falcosidekick
-  tag: 2.23.1
+  tag: 2.24.0
   pullPolicy: IfNotPresent
 
 podSecurityContext:
@@ -123,6 +124,7 @@ config:
     checkcert: true
 
   aws:
+    rolearn: ""
     accesskeyid: ""
     secretaccesskey: ""
     region: ""
@@ -265,9 +267,47 @@ config:
     flushintervalseconds: 1  # Time in seconds between flushing metrics to Wavefront. Defaults to 1s
     minimumpriority: "debug"  # minimum priority of event for using this output, order is emergency|alert|critical|error|warning|notice|informational|debug or "" (default)
 
+  grafana:
+    hostport: ""  # http://{domain or ip}:{port}, if not empty, Grafana output is enabled
+    apikey: ""  # API Key to authenticate to Grafana, if not empty, Grafana output is enabled
+    dashboardid: ""  # annotations are scoped to a specific dashboard. Optionnal.
+    panelid: ""  # annotations are scoped to a specific panel. Optionnal.
+    allfieldsastags: false  # if true, all custom fields are added as tags (default: false)
+    mutualtls: false  # if true, checkcert flag will be ignored (server cert will always be checked)
+    checkcert: true  # check if ssl certificate of the output is valid (default: true)
+    minimumpriority: ""  # minimum priority of event for using this output, order is emergency|alert|critical|error|warning|notice|informational|debug or "" (default)
+
+  fission:
+    function: ""  # Name of Fission function, if not empty, Fission is enabled
+    routernamespace: "fission"  # Namespace of Fission Router, "fission" (default)
+    routerservice: "router"  # Service of Fission Router, "router" (default)
+    routerport: 80  # Port of service of Fission Router
+    minimumpriority: ""  # minimum priority of event for using this output, order is emergency|alert|critical|error|warning|notice|informational|debug or "" (default)
+    checkcert: true  # check if ssl certificate of the output is valid (default: true)
+    mutualtls: false  # if true, checkcert flag will be ignored (server cert will always be checked)
+
+  yandex:
+    accesskeyid: ""  # yandex access key
+    secretaccesskey: ""  # yandex secret access key
+    region: ""  # yandex storage region (default: ru-central-1)
+    s3:
+      endpoint: ""  # yandex storage endpoint (default: https://storage.yandexcloud.net)
+      bucket: ""  # Yandex storage, bucket name
+      prefix: ""  # name of prefix, keys will have format: s3://<bucket>/<prefix>/YYYY-MM-DD/YYYY-MM-DDTHH:mm:ss.s+01:00.json
+      minimumpriority: ""  # minimum priority of event for using this output, order is emergency|alert|critical|erro
+
+  kafkarest:
+    address: ""  # The full URL to the topic (example "http://kafkarest:8082/topics/test")
+    version: 2  # Kafka Rest Proxy API version 2|1 (default: 2)
+    minimumpriority: ""  # minimum priority of event for using this output, order is emergency|alert|critical|error|warning|notice|informational|debug or "" (default)
+    mutualtls: false  # if true, checkcert flag will be ignored (server cert will always be checked)
+    checkcert: true  # check if ssl certificate of the output is valid (default: true)
+
 service:
   type: ClusterIP
   port: 2801
+  annotations: {}
+    # networking.gke.io/load-balancer-type: Internal
 
 ingress:
   enabled: false
@@ -276,7 +316,10 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: falcosidekick.local
-      paths: []
+      paths:
+        - path: /
+          # -- pathType (e.g. ImplementationSpecific, Prefix, .. etc.)
+          # pathType: Prefix
 
   tls: []
   #  - secretName: chart-example-tls
@@ -301,11 +344,27 @@ tolerations: []
 
 affinity: {}
 
+# Add extra volumes to Falco UI deployment
+extraVolumes: []
+# - name: optional-mtls-volume
+#   configMap:
+#     name: falco-certs-optional
+#     optional: true
+#     items:
+#       - key: mtlscert.optional.tls
+#         path: mtlscert.optional.tls
+
+# Add extra volumeMounts to Falco container in Falco UI deployment
+extraVolumeMounts: []
+# - mountPath: /etc/certs/mtlscert.optional.tls
+#   name: optional-mtls-volume
+
 webui:
   enabled: false
   darkmode: false
 
   image:
+    registry: docker.io
     repository: falcosecurity/falcosidekick-ui
     tag: "v1.1.0"
     pullPolicy: IfNotPresent
@@ -340,7 +399,16 @@ webui:
       # kubernetes.io/tls-acme: "true"
     hosts:
       - host: falcosidekick-ui.local
-        paths: ["/ui", "/events", "/healthz", "/ws"]
+        paths:
+        - path: /ui
+          # -- pathType (e.g. ImplementationSpecific, Prefix, .. etc.)
+          # pathType: Prefix
+        - path: /events
+          # pathType: Prefix
+        - path: /healthz
+          # pathType: Prefix
+        - path: /ws
+          # pathType: Prefix
 
     tls: []
     #  - secretName: chart-example-tls
