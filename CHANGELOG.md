@@ -3,6 +3,72 @@
 This file documents all notable changes to Falco Helm Chart. The release
 numbering uses [semantic versioning](http://semver.org).
 
+## v1.16.2
+
+* Add `serviceAccount.annotations` configuration
+
+## v1.16.1
+
+* Fixed string escaping for `--k8s-node`
+
+## v1.16.0
+
+* Upgrade to Falco 0.30.0 (see the [Falco changelog](https://github.com/falcosecurity/falco/blob/0.30.0/CHANGELOG.md))
+* Update rulesets from Falco 0.30.0
+* Add `kubernetesSupport.enableNodeFilter` configuration to enable node filtering when requesting pods metadata from Kubernetes
+* Add `falco.metadataDownload` configuration for fine-tuning container orchestrator metadata fetching params
+* Add `falco.jsonIncludeTagsProperty` configuration to include tags in the JSON output
+
+## v1.15.7
+
+* Removed `maxSurge` reference from comment in Falco's `values.yaml` file.
+
+## v1.15.6
+
+* Update `Falcosidekick` chart to 0.3.13
+
+## v1.15.4
+
+* Update `Falcosidekick` chart to 0.3.12
+
+## v1.15.3
+
+* Upgrade to Falco 0.29.1 (see the [Falco changelog](https://github.com/falcosecurity/falco/blob/0.29.1/CHANGELOG.md))
+* Update rulesets from Falco 0.29.1
+
+## v1.15.2
+
+* Add ability to use an existing secret of key, cert, ca as well as pem bundle instead of creating it from files
+
+## v1.15.1
+
+* Fixed liveness and readiness probes schema when ssl is enabled
+
+## v1.14.1
+
+* Update `Falcosidekick` chart to 0.3.8
+
+## v1.14.1
+
+* Update image tag to 0.29.0 in values.yaml
+
+## v1.14.0
+
+* Upgrade to Falco 0.29.0 (see the [Falco changelog](https://github.com/falcosecurity/falco/blob/0.29.0/CHANGELOG.md))
+* Update rulesets from Falco 0.29.0
+
+## v1.13.2
+
+* Fixed incorrect spelling of `fullfqdn`
+
+## v1.13.1
+
+* Fix port for readinessProbe and livenessProbe
+
+## v1.13.0
+
+* Add liveness and readiness probes to Falco
+
 ## v1.12.0
 
 * Add `kubernetesSupport` configuration to make Kubernetes Falco support optional in the daemonset (enabled by default)

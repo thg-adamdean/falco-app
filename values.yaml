@@ -3,7 +3,7 @@
 image:
   registry: docker.io
   repository: falcosecurity/falco
-  tag: 0.28.1
+  tag: 0.30.0
   pullPolicy: IfNotPresent
   pullSecrets: []
 
@@ -32,6 +32,9 @@ kubernetesSupport:
   #     ':' or '#' characters in the file name.
   apiAuth: /var/run/secrets/kubernetes.io/serviceaccount/token
   apiUrl: "https://$(KUBERNETES_SERVICE_HOST)"
+  # If true, only the current node (on which Falco is running) will be considered when requesting metadata of pods
+  # to the API server. Disabling this option may have a performance penalty on large clusters.
+  enableNodeFilter: true
 
 resources:
   # Although resources needed are subjective on the actual workload we provide
@@ -61,6 +64,7 @@ serviceAccount:
   create: true
   # Use this value as serviceAccountName
   name:
+  annotations: {}
 
 fakeEventGenerator:
   enabled: false
@@ -74,7 +78,7 @@ daemonset:
   # Perform rolling updates by default in the DaemonSet agent
   # ref: https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/
   updateStrategy:
-    # You can also customize maxUnavailable, maxSurge or minReadySeconds if you
+    # You can also customize maxUnavailable or minReadySeconds if you
     # need it
     type: RollingUpdate
 
@@ -139,6 +143,12 @@ falco:
   # itself (e.g. "File below a known binary directory opened for writing
   # (user=root ....") in the json output.
   jsonIncludeOutputProperty: true
+
+  # When using json output, whether or not to include the "tags" property
+  # itself in the json output. If set to true, outputs caused by rules
+  # with no tags will have a "tags" field set to an empty array. If set to
+  # false, the "tags" field will not be included in the json output at all.
+  jsonIncludeTagsProperty: true
 
   # Send information logs to stderr and/or syslog Note these are *not* security
   # notification logs! These are just Falco lifecycle (and possibly error) logs.
@@ -240,8 +250,19 @@ falco:
     listenPort: 8765
     nodePort: false
     k8sAuditEndpoint: /k8s-audit
+    k8sHealthzEndpoint: /healthz
     sslEnabled: false
     sslCertificate: /etc/falco/certs/server.pem
+
+  livenessProbe:
+    initialDelaySeconds: 60
+    timeoutSeconds: 5
+    periodSeconds: 15
+
+  readinessProbe:
+    initialDelaySeconds: 30
+    timeoutSeconds: 5
+    periodSeconds: 15
 
   # Possible additional things you might want to do with program output:
   #   - send to a slack webhook:
@@ -309,6 +330,12 @@ falco:
   grpcOutput:
     enabled: false
 
+  # Container orchestrator metadata fetching params
+  metadataDownload:
+    maxMb: 100
+    chunkWaitUs: 1000
+    watchFreqSec: 1
+
 customRules:
   {}
   # Although Falco comes with a nice default rule set for detecting weird
@@ -323,7 +350,9 @@ customRules:
 
 # certificates used by webserver and grpc server
 # paste certificate content or use helm with --set-file
+# or use existing secret containing key, crt, ca as well as pem bundle
 certs:
+  existingSecret: ""
   server:
     key: ""
     crt: ""
@@ -360,5 +389,5 @@ extraVolumeMounts: []
 falcosidekick:
   # enable falcosidekick deployment
   enabled: false
-  fullfdqn: false
+  fullfqdn: false
   # for configuration values, see https://github.com/falcosecurity/charts/blob/master/falcosidekick/values.yaml
