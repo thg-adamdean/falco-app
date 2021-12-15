@@ -3,6 +3,30 @@
 This file documents all notable changes to `falco-exporter` Helm Chart. The release
 numbering uses [semantic versioning](http://semver.org).
 
+## v0.6.2
+
+## Minor Changes
+
+* Add Check availability of 'monitoring.coreos.com/v1' api version
+
+## v0.6.1
+
+### Minor Changes
+
+* Add option the add annotations to the Daemonset
+
+## v0.6.0
+
+### Minor Changes
+
+* Upgrade falco-exporter version to v0.6.0 (see the [falco-exporter changelog](https://github.com/falcosecurity/falco-exporter/releases/tag/v0.6.0))
+
+## v0.5.2
+
+### Minor changes
+
+* Make image registry configurable
+
 ## v0.5.1
 
 * Display only non-zero rates in Grafana dashboard template
