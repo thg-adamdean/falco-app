@@ -4,8 +4,6 @@ falco:
     repository: giantswarm/falco
   podSecurityPolicy:
     create: true
-  serviceAccount:
-    name: falco-user
   falco:
     grpc:
       enabled: true
@@ -18,8 +16,6 @@ falco-exporter:
     repository: giantswarm/falco-exporter
   podSecurityPolicy:
     create: true
-  serviceAccount:
-    name: falco-user
   resources:
     limits:
       cpu: 100m
