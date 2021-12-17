@@ -7,8 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.2.0] - 2021-12-15
-
 ### Changed
 
 - Update to upstream charts: Falco 1.16.2/0.30.0, exporter 0.6.3/0.6.0, sidekick 0.4.4/2.24.0.

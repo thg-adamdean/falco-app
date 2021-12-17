@@ -5,9 +5,7 @@
 Giant Swarm offers a [falco](https://falco.org/) App which can be installed in workload clusters.
 Here we define the falco chart with its templates and default configuration.
 
-**What is this app?**
-**Why did we add it?**
-**Who can use it?**
+Falco is a host-based intrusion detection system which watches and checks Linux syscalls against a predefined list of rules. Anomalous activity (as defined by the rules) triggers a Falco event, which can be used to alert responders or take automated remediation actions.
 
 ## Installing
 
@@ -19,9 +17,13 @@ There are 3 ways to install this app onto a workload cluster.
 
 ## Configuring
 
+**Note: There are currently known compatibility issues when using the Falco kernel module with Flatcar kernel version 5.10.77-flatcar and later. The ebpf driver must be used instead (see the sample `user-values-configmap.yaml` below).**
+
 ### values.yaml
+
 **This is an example of a values file you could upload using our web interface.**
-```
+
+```yaml
 # values.yaml
 
 global:
@@ -30,8 +32,6 @@ global:
 falco:
   podSecurityPolicy:
     create: true
-  serviceAccount:
-    name: falco-user
   falco:
     grpc:
       enabled: true
@@ -48,8 +48,6 @@ falco:
 falco-exporter:
   podSecurityPolicy:
     create: true
-  serviceAccount:
-    name: falco-user
 
 falcosidekick:
 
@@ -71,37 +69,22 @@ Please see the below page for configurable values.
 [Falco sidekick Configuration](helm/falco-app/charts/falcosidekick#configuration)
 
 ### Sample App CR and ConfigMap for the management cluster
+
 If you have access to the Kubernetes API on the management cluster, you could create
 the App CR and ConfigMap directly.
 
-Here is an example that would install the app to
-workload cluster `abc12`:
+You can provide additional configuration via a ConfigMap or the web interface.
 
-```
-# appCR.yaml
-
-```
-
-```
+```yaml
 # user-values-configmap.yaml
-
+# To use the ebpf driver instead of the Falco kernel module:
+falco:
+  ebpf:
+    enabled: "true"
 
 ```
 
 See our [full reference page on how to configure applications](https://docs.giantswarm.io/app-platform/app-configuration/) for more details.
-
-## Compatibility
-
-This app has been tested to work with the following workload cluster release versions:
-
-*
-
-## Limitations
-
-Some apps have restrictions on how they can be deployed.
-Not following these limitations will most likely result in a broken deployment.
-
-*
 
 ## Credit
 
