@@ -3,6 +3,32 @@
 This file documents all notable changes to `falco-exporter` Helm Chart. The release
 numbering uses [semantic versioning](http://semver.org).
 
+## v0.8.0
+
+* Upgrade falco-exporter version to v0.7.0 (see the [falco-exporter changelog](https://github.com/falcosecurity/falco-exporter/releases/tag/v0.7.0)) 
+
+### Major Changes
+
+* Add option to add labels to the Daemonset pods
+
+## v0.7.2
+
+### Minor Changes
+
+* Add option to add labels to the Daemonset pods
+
+## v0.7.1
+
+### Minor Changes
+
+* Fix `FalcoExporterAbsent` expression
+
+## v0.7.0
+
+### Major Changes
+
+* Adds ability to create custom PrometheusRules for alerting
+
 ## v0.6.2
 
 ## Minor Changes
@@ -38,6 +64,7 @@ numbering uses [semantic versioning](http://semver.org).
 * Upgrade falco-exporter version to v0.5.0
 * Add metrics about Falco drops
 * Make `unix://` prefix optional
+
 ## v0.4.2
 
 ### Minor Changes
