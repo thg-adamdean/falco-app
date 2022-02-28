@@ -9,11 +9,10 @@ Falco is a host-based intrusion detection system which watches and checks Linux 
 
 ## Installing
 
-There are 3 ways to install this app onto a workload cluster.
+There are several ways to install this app onto a workload cluster.
 
-1. [Using our web interface](https://docs.giantswarm.io/ui-api/web/app-platform/#installing-an-app)
-2. [Using our API](https://docs.giantswarm.io/api/#operation/createClusterAppV5)
-3. Directly creating the [App custom resource](https://docs.giantswarm.io/ui-api/management-api/crd/apps.application.giantswarm.io/) on the management cluster.
+- [Using our web interface][app-ui]
+- By creating an [App resource][app-crd] in the management cluster as explained in [Getting started with App Platform][app-getting-started].
 
 ## Configuring
 
@@ -84,8 +83,13 @@ falco:
 
 ```
 
-See our [full reference page on how to configure applications](https://docs.giantswarm.io/app-platform/app-configuration/) for more details.
+See our [full reference page on how to configure applications][app-config] for more details.
 
 ## Credit
 
 * https://github.com/falcosecurity/charts
+
+[app-config]: https://docs.giantswarm.io/app-platform/app-configuration/
+[app-crd]: https://docs.giantswarm.io/ui-api/management-api/crd/apps.application.giantswarm.io/
+[app-getting-started]: https://docs.giantswarm.io/app-platform/getting-started/
+[app-ui]: https://docs.giantswarm.io/ui-api/web/app-platform/#installing-an-app
