@@ -5,7 +5,7 @@ annotations:
   config.giantswarm.io/version: 1.x.x
 dependencies:
 - name: falco
-  version: 1.16.3
+  version: 1.17.2
 - name: falco-exporter
   version: 0.6.3
 - name: falcosidekick
