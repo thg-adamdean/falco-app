@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Update to upstream falco 1.17.2/0.31.0.
+- Update to upstream falco-exporter 0.8.0/0.7.0.
 
 ## [0.2.0] - 2021-12-17
 
