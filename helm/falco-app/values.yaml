@@ -5,6 +5,8 @@ falco:
   podSecurityPolicy:
     create: true
   priorityClassName: giantswarm-critical
+  ebpf:
+    enabled: true
   falco:
     grpc:
       enabled: true
