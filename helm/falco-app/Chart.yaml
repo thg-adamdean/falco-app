@@ -10,7 +10,7 @@ dependencies:
   version: 0.8.0
 - name: falcosidekick
   version: 0.4.4
-description: A Helm chart for falco
+description: A Helm chart for Falco, an open source cloud native runtime security tool.
 engine: gotpl
 home: https://github.com/giantswarm/falco-app
 icon: https://s.giantswarm.io/app-icons/falco/1/dark.svg
