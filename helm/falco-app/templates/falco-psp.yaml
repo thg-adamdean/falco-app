@@ -6,16 +6,14 @@ kind: PodSecurityPolicy
 metadata:
   name: {{ template "falco-helpers.fullname" . }}
   labels:
-    app: {{ template "falco-helpers.fullname" . }}
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
-    release: "{{ .Release.Name }}"
-    heritage: "{{ .Release.Service }}"
+    {{- include "falco-helpers.labels" . | nindent 4 }}
   annotations:
     seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'runtime/default'
 spec:
   privileged: true
   hostNetwork: true
   allowedCapabilities: ['*']
+  allowPrivilegeEscalation: false
   fsGroup:
     rule: RunAsAny
   runAsUser:
@@ -24,7 +22,12 @@ spec:
     rule: RunAsAny
   supplementalGroups:
     rule: RunAsAny
-  volumes: ['*']
+  volumes:
+    - 'configMap'
+    - 'emptyDir'
+    - 'hostPath'
+    - 'secret'
+    - 'projected'
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole

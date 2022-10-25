@@ -1,8 +1,8 @@
 apiVersion: v2
-appVersion: 0.0.1
+appVersion: [[ .Version ]]
 annotations:
   application.giantswarm.io/team: "honeybadger"
-  config.giantswarm.io/version: 1.x.x
+  config.giantswarm.io/version: "falco-rule-updates"
 dependencies:
 - name: falco
   version: 2.2.0
