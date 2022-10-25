@@ -2,15 +2,17 @@ falco:
   image:
     registry: docker.io
     repository: giantswarm/falco
-  podSecurityPolicy:
-    create: true
+  # podSecurityPolicy:
+  #   create: true
   priorityClassName: giantswarm-critical
-  ebpf:
-    enabled: true
+  driver:
+    kind: ebpf
+  # ebpf:
+  #   enabled: true
   falco:
     grpc:
       enabled: true
-    grpcOutput:
+    grpc_output:
       enabled: true
 
 falco-exporter:
