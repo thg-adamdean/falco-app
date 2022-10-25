@@ -1,9 +1,10 @@
+podSecurityPolicy:
+  create: true
+
 falco:
   image:
     registry: docker.io
     repository: giantswarm/falco
-  # podSecurityPolicy:
-  #   create: true
   priorityClassName: giantswarm-critical
   driver:
     kind: ebpf
@@ -14,6 +15,9 @@ falco:
       enabled: true
     grpc_output:
       enabled: true
+  serviceAccount:
+    # We set the service account name only so that we can use it for attaching a PSP.
+    name: "falco"
 
 falco-exporter:
   image:
