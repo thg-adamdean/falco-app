@@ -12,7 +12,7 @@ metadata:
 spec:
   allowPrivilegeEscalation: false
   allowedHostPaths:
-  - pathPrefix: "/run/falco"
+  - pathPrefix: "/var/run/falco"
     readOnly: true
   fsGroup:
     rule: RunAsAny
