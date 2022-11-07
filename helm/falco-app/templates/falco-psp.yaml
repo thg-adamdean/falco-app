@@ -8,12 +8,12 @@ metadata:
   labels:
     {{- include "falco-helpers.labels" . | nindent 4 }}
   annotations:
-    seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'runtime/default'
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
 spec:
   privileged: true
   hostNetwork: true
   allowedCapabilities: ['*']
-  allowPrivilegeEscalation: false
+  allowPrivilegeEscalation: true
   fsGroup:
     rule: RunAsAny
   runAsUser:
