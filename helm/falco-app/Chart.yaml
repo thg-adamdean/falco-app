@@ -7,7 +7,7 @@ dependencies:
 - name: falco
   version: 2.2.0
 - name: falco-exporter
-  version: 0.9.0
+  version: 0.9.1
 - name: falcosidekick
   version: 0.5.9
 description: A Helm chart for falco
