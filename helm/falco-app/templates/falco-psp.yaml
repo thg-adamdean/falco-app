@@ -1,0 +1,63 @@
+{{- if .Values.podSecurityPolicy.create}}
+{{- if .Capabilities.APIVersions.Has "policy/v1beta1/PodSecurityPolicy" }}
+---
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: {{ template "falco-helpers.fullname" . }}-psp
+  labels:
+    {{- include "falco-helpers.labels" . | nindent 4 }}
+  annotations:
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
+spec:
+  privileged: true
+  hostNetwork: true
+  allowedCapabilities: ['*']
+  allowPrivilegeEscalation: true
+  fsGroup:
+    rule: RunAsAny
+  runAsUser:
+    rule: RunAsAny
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  volumes:
+    - 'configMap'
+    - 'emptyDir'
+    - 'hostPath'
+    - 'secret'
+    - 'projected'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ template "falco-helpers.fullname" . }}-psp
+  labels:
+    {{- include "falco-helpers.labels" . | nindent 4 }}
+rules:
+  - apiGroups:
+      - extensions
+    resources:
+      - podsecuritypolicies
+    verbs:
+      - use
+    resourceNames:
+      - {{ template "falco-helpers.fullname" . }}-psp
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ template "falco-helpers.fullname" . }}-psp
+  labels:
+    {{- include "falco-helpers.labels" . | nindent 4 }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ index .Values.falco.serviceAccount.name }}
+    namespace: {{ include "falco-helpers.namespace"  . }}
+roleRef:
+  kind: ClusterRole
+  name: {{ template "falco-helpers.fullname" . }}-psp
+  apiGroup: rbac.authorization.k8s.io
+{{- end }}
+{{- end }}

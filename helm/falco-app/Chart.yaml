@@ -1,15 +1,15 @@
 apiVersion: v2
-appVersion: 0.0.1
+appVersion: [[ .Version ]]
 annotations:
-  application.giantswarm.io/team: "honeybadger"
+  application.giantswarm.io/team: "shield"
   config.giantswarm.io/version: 1.x.x
 dependencies:
 - name: falco
-  version: 1.17.2
+  version: 2.2.0
 - name: falco-exporter
-  version: 0.8.0
+  version: 0.9.1
 - name: falcosidekick
-  version: 0.4.4
+  version: 0.5.9
 description: A Helm chart for falco
 engine: gotpl
 home: https://github.com/giantswarm/falco-app

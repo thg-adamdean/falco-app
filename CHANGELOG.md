@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Note:** Due to breaking changes in the official chart, it is not possible to cleanly replace an existing Falco DaemonSet from a previous version with this new version. As a result, when updating to this version, there will be a short Falco downtime while the existing DaemonSet is deleted and replaced.
+- Update `falco` to upstream version 0.33.0 / chart version 2.2.0.
+- Update `falco-exporter` to upstream version 0.8.0 / chart version 0.9.1.
+- Update `falcosidekick` to upstream version 2.26.0 / chart version 0.5.9.
+
 ## [0.3.2] - 2022-03-25
 
 ### Changed
