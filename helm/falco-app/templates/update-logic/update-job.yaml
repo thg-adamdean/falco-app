@@ -41,7 +41,7 @@ spec:
           # in the pod's logs.
 
           # Workaround for broken upgrade path going to 0.33.0.
-          kubectl delete ds -n $pod_namespace falco-app
+          kubectl delete ds -n $pod_namespace {{ include "falco.fullname" . }}
 
         env:
           - name: pod_namespace
