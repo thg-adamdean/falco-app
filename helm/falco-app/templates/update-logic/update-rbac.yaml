@@ -1,0 +1,57 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "falco-helpers.updateLogic" . }}
+  namespace: {{ .Release.Namespace | quote }}
+  annotations:
+    # create hook dependencies in the right order
+    "helm.sh/hook-weight": "-3"
+    {{- include "falco-helpers.UpdateLogicAnnotations" . | nindent 4 }}
+  labels:
+    app.kubernetes.io/component: {{ include "falco-helpers.updateLogic" . | quote }}
+    {{- include "falco.selectorLabels" . | nindent 4 }}
+    role: {{ include "falco-helpers.UpdateLogicSelector" . | quote }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - jobs
+  verbs:
+  - create
+  - delete
+- apiGroups:
+  - apps
+  resources:
+  - daemonsets
+  verbs:
+  - delete
+- apiGroups:
+  - policy
+  resources:
+  - podsecuritypolicies
+  resourceNames:
+  - {{ include "falco-helpers.updateLogic" . }}
+  verbs:
+  - use
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "falco-helpers.updateLogic" . }}
+  namespace: {{ .Release.Namespace | quote }}
+  annotations:
+    # create hook dependencies in the right order
+    "helm.sh/hook-weight": "-2"
+    {{- include "falco-helpers.UpdateLogicAnnotations" . | nindent 4 }}
+  labels:
+    app.kubernetes.io/component: {{ include "falco-helpers.updateLogic" . | quote }}
+    {{- include "falco-helpers.labels" . | nindent 4 }}
+    role: {{ include "falco-helpers.UpdateLogicSelector" . | quote }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "falco-helpers.updateLogic" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "falco-helpers.updateLogic" . }}
+    namespace: {{ .Release.Namespace | quote }}
