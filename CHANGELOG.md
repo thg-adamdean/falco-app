@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2022-11-09
+
 ### Changed
 
 - **Note:** Due to breaking changes in the official chart, it is not possible to cleanly replace an existing Falco DaemonSet from a previous version with this new version. As a result, when updating to this version, there will be a short Falco downtime while the existing DaemonSet is deleted and replaced.
@@ -63,7 +65,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Push `falco-app` to provider collections (except KVM) when tagged.
 - Use Giant Swarm-managed images.
 
-[Unreleased]: https://github.com/giantswarm/falco-app/compare/v0.3.2...HEAD
+[Unreleased]: https://github.com/giantswarm/falco-app/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/giantswarm/falco-app/compare/v0.3.2...v0.4.0
 [0.3.2]: https://github.com/giantswarm/falco-app/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/giantswarm/falco-app/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/giantswarm/falco-app/compare/v0.2.0...v0.3.0
