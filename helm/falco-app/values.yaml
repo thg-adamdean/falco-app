@@ -1,6 +1,9 @@
 podSecurityPolicy:
   create: true
 
+verticalPodAutoscaler:
+  enabled: false
+
 falco:
   image:
     registry: docker.io

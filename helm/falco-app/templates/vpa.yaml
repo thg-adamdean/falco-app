@@ -1,0 +1,23 @@
+{{ if .Capabilities.APIVersions.Has "autoscaling.k8s.io/v1" }}
+{{ if .Values.verticalPodAutoscaler.enabled }}
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: {{ template "falco-helpers.fullname" . }}-vpa
+  namespace: {{ include "falco-helpers.namespace" . }}
+  labels:
+  {{- include "falco-helpers.labels" . | nindent 4 }}
+spec:
+  resourcePolicy:
+    containerPolicies:
+      - containerName: {{ include "falco-helpers.fullname" . }}
+        controlledValues: RequestsAndLimits
+        mode: Auto
+  targetRef:
+    apiVersion: apps/v1
+    kind: DaemonSet
+    name:  {{ include "falco-helpers.fullname" . }}
+  updatePolicy:
+    updateMode: Auto
+{{ end }}
+{{ end }}
