@@ -11,6 +11,11 @@ falco:
   priorityClassName: giantswarm-critical
   driver:
     kind: ebpf
+    loader:
+      initContainer:
+        image:
+          registry: docker.io
+          repository: giantswarm/falco-driver-loader
   # ebpf:
   #   enabled: true
   falco:
