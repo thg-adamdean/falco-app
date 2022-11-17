@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Use local registries for Falco driver loader image.
+- Remove update logic used for upstream 0.33.0 upgrade.
 
 ## [0.4.1] - 2022-11-16
 
