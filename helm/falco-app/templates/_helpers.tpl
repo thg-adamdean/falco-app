@@ -56,10 +56,10 @@ heritage: {{ $.Release.Service | quote }}
 {{- end }}
 
 {{/*
-CRD installation helpers used by Giant Swarm.
+CRD installation / update helpers used by Giant Swarm. These may or may not be used depending on whether any custom logic is needed to  support upgrades.
 */}}
 {{- define "falco-helpers.updateLogic" -}}
-{{- printf "%s-%s" ( default .Chart.Name .Values.nameOverride | trunc 63 ) "crd-install" | replace "+" "_" | trimSuffix "-" -}}
+{{- printf "%s-%s" ( default .Chart.Name .Values.nameOverride | trunc 63 ) "update-logic" | replace "+" "_" | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*

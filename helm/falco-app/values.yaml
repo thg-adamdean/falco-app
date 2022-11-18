@@ -1,6 +1,9 @@
 podSecurityPolicy:
   create: true
 
+verticalPodAutoscaler:
+  enabled: false
+
 falco:
   image:
     registry: docker.io
@@ -8,6 +11,11 @@ falco:
   priorityClassName: giantswarm-critical
   driver:
     kind: ebpf
+    loader:
+      initContainer:
+        image:
+          registry: docker.io
+          repository: giantswarm/falco-driver-loader
   # ebpf:
   #   enabled: true
   falco:
@@ -37,36 +45,3 @@ falcosidekick:
   image:
     registry: docker.io
     repository: giantswarm/falcosidekick
-
-updateLogic:
-  image:
-    registry: docker.io
-    tag: 1.24.1
-  resources:
-    requests:
-      cpu: 100m
-      memory: 256Mi
-    limits:
-      cpu: 500m
-      memory: 512Mi
-  # Pod securityContext
-  podSecurityContext:
-    runAsNonRoot: true
-    runAsUser: 10000
-    runAsGroup: 10000
-    seccompProfile:
-      type: RuntimeDefault
-
-  # Container securityContext
-  securityContext:
-    allowPrivilegeEscalation: false
-    capabilities:
-      drop:
-      - ALL
-    privileged: false
-    readOnlyRootFilesystem: true
-    runAsNonRoot: true
-    runAsUser: 10000
-    runAsGroup: 10000
-    seccompProfile:
-      type: RuntimeDefault
