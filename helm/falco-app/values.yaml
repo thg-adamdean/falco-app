@@ -6,7 +6,7 @@ verticalPodAutoscaler:
 
 falco:
   services:
-    #Service where the k8s-api can push the auditlogs to. Settings shown below are default, but added to this file.
+    # Service where the k8s-api can push the auditlogs to. Settings shown below are default, but added to this file.
     - name: k8saudit-webhook
       type: NodePort
       ports:
@@ -33,15 +33,16 @@ falco:
     grpc_output:
       enabled: true
     plugins:
-    #Putting plugins in this file because we might have to tweak them in the future.
+    # Putting plugins in this file because we might have to tweak them in the future.
       - name: k8saudit
         library_path: libk8saudit.so
-        init_config: # Still have to take a look whether we need to change these, yes or no.
+        init_config:
+        # Still have to take a look whether we need to change these, yes or no.
         #   maxEventSize: 262144
         #   webhookMaxBatchSize: 12582912
-           sslCertificate: /etc/falco/falco.pem
+          sslCertificate: /etc/falco/falco.pem
         open_params: "https://:9765/k8s-audit"
-        #Options are [A] We mount api-servers audit log file and read those [B] open a service endpoint which should be an auditsink.
+        # Options are [A] We mount api-servers audit log file and read those [B] open a service endpoint which should be an auditsink.
       - name: json
         library_path: libjson.so
         init_config: ""
