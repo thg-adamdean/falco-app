@@ -5,15 +5,6 @@ verticalPodAutoscaler:
   enabled: false
 
 falco:
-#  services:
-#    # Service where the k8s-api can push the auditlogs to. Settings shown below are default, but added to this file.
-#    - name: k8saudit-webhook
-#      type: NodePort
-#      ports:
-#        - port: 9765
-#          nodePort: 30007
-#          protocol: TCP
-
   image:
     registry: docker.io
     repository: giantswarm/falco
@@ -32,25 +23,28 @@ falco:
       enabled: true
     grpc_output:
       enabled: true
+    rules_file:
+    # adding the rule file list to override the default, because the default does not include plugin rules.
+      - /etc/falco/falco_rules.yaml
+      - /etc/falco/falco_rules.local.yaml
+      - /etc/falco/rules.d
+      - /etc/falco/k8s_audit_rules.yaml
     plugins:
-    # Putting plugins in this file because we might have to tweak them in the future.
       - name: k8saudit
         library_path: libk8saudit.so
         init_config:
-        # Still have to take a look whether we need to change these, yes or no.
-        #   maxEventSize: 262144
-        #   webhookMaxBatchSize: 12582912
-        #  sslCertificate: /etc/falco/falco.pem
         open_params: "/host/audit.log"
-        #  Options are [A] We mount api-servers audit log file and read those [B] open a service endpoint which should be an auditsink.
+        #  Other option is opening a service and add Falco to the k8s_audit sinks.
       - name: json
         library_path: libjson.so
         init_config: ""
     load_plugins: [k8saudit, json]
+    # The syscall "plugin"/functionality is enabled be default.
   serviceAccount:
     # We set the service account name only so that we can use it for attaching a PSP.
     name: "falco"
   mounts:
+    # Mounts the k8s_audit log file if present (only on api servers)
     volumes:
     - name: auditfile
       hostPath:
