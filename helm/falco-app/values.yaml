@@ -33,7 +33,7 @@ falco:
       - name: k8saudit
         library_path: libk8saudit.so
         init_config:
-        open_params: "/host/audit.log"
+        open_params: "/host/apiserver/"
         #  Other option is opening a service and add Falco to the k8s_audit sinks.
       - name: json
         library_path: libjson.so
@@ -48,9 +48,9 @@ falco:
     volumes:
     - name: auditfile
       hostPath:
-        path: /var/log/apiserver/audit.log
+        path: /var/log/apiserver
     volumeMounts:
-    - mountPath: /host/audit.log
+    - mountPath: /host/apiserver
       name: auditfile
       readOnly: true
 
