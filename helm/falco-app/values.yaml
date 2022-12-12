@@ -7,7 +7,7 @@ verticalPodAutoscaler:
 falco:
   image:
     registry: docker.io
-    repository: giantswarm/falco
+    repository: giantswarm/falco-no-driver
   priorityClassName: giantswarm-critical
   driver:
     kind: ebpf

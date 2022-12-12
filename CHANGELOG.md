@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Update icon url in chart
-- Enabled k8saudit plugin
+- Started using the falco-no-driver image! Reducing lots of vulnerabilities!
 
 ## [0.4.2] - 2022-11-17
 
