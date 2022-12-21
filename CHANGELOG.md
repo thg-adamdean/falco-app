@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.3] - 2022-12-21
+
 ### Changed
 
 - Update icon url in chart
@@ -83,7 +85,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Push `falco-app` to provider collections (except KVM) when tagged.
 - Use Giant Swarm-managed images.
 
-[Unreleased]: https://github.com/giantswarm/falco-app/compare/v0.4.2...HEAD
+[Unreleased]: https://github.com/giantswarm/falco-app/compare/v0.4.3...HEAD
+[0.4.3]: https://github.com/giantswarm/falco-app/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/giantswarm/falco-app/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/giantswarm/falco-app/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/giantswarm/falco-app/compare/v0.3.2...v0.4.0
