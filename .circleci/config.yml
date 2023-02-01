@@ -10,7 +10,7 @@ workflows:
           name: push-falco-app-to-control-plane-catalog
           app_catalog: "control-plane-catalog"
           app_catalog_test: "control-plane-test-catalog"
-          chart: "falco-app"
+          chart: "falco"
           # Trigger job on git tag.
           filters:
             tags:
@@ -21,7 +21,7 @@ workflows:
           name: push-falco-app-to-giantswarm-catalog
           app_catalog: "giantswarm-catalog"
           app_catalog_test: "giantswarm-test-catalog"
-          chart: "falco-app"
+          chart: "falco"
           # Trigger job on git tag.
           filters:
             tags:
@@ -30,7 +30,7 @@ workflows:
       - architect/push-to-app-collection:
           name: aws-app-collection
           context: "architect"
-          app_name: "falco-app"
+          app_name: "falco"
           app_collection_repo: "aws-app-collection"
           requires:
             - push-falco-app-to-control-plane-catalog
@@ -43,7 +43,7 @@ workflows:
       - architect/push-to-app-collection:
           name: azure-app-collection
           context: "architect"
-          app_name: "falco-app"
+          app_name: "falco"
           app_collection_repo: "azure-app-collection"
           requires:
             - push-falco-app-to-control-plane-catalog
@@ -56,7 +56,7 @@ workflows:
       #- architect/push-to-app-collection:
       #    name: kvm-app-collection
       #    context: "architect"
-      #    app_name: "falco-app"
+      #    app_name: "falco"
       #    app_collection_repo: "kvm-app-collection"
       #    requires:
       #      - push-falco-app-to-control-plane-catalog
@@ -69,7 +69,7 @@ workflows:
       - architect/push-to-app-collection:
           name: vsphere-app-collection
           context: "architect"
-          app_name: "falco-app"
+          app_name: "falco"
           app_collection_repo: "vsphere-app-collection"
           requires:
             - push-falco-app-to-control-plane-catalog
@@ -82,7 +82,7 @@ workflows:
       - architect/push-to-app-collection:
           name: openstack-app-collection
           context: "architect"
-          app_name: "falco-app"
+          app_name: "falco"
           app_collection_repo: "openstack-app-collection"
           requires:
             - push-falco-app-to-control-plane-catalog
@@ -95,7 +95,7 @@ workflows:
       - architect/push-to-app-collection:
           context: architect
           name: push-to-cloud-director-app-collection
-          app_name: "falco-app"
+          app_name: "falco"
           app_collection_repo: "cloud-director-app-collection"
           requires:
             - push-falco-app-to-control-plane-catalog
@@ -108,7 +108,7 @@ workflows:
       - architect/push-to-app-collection:
           context: architect
           name: push-to-capa-app-collection
-          app_name: "falco-app"
+          app_name: "falco"
           app_collection_repo: "capa-app-collection"
           requires:
             - push-falco-app-to-control-plane-catalog
@@ -121,7 +121,7 @@ workflows:
       - architect/push-to-app-collection:
           context: architect
           name: push-to-gcp-app-collection
-          app_name: "falco-app"
+          app_name: "falco"
           app_collection_repo: "gcp-app-collection"
           requires:
             - push-falco-app-to-control-plane-catalog

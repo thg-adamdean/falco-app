@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Renamed `falco-app` to `falco`.
+
 ## [0.4.3] - 2022-12-21
 
 ### Changed

@@ -18,7 +18,7 @@ icon: https://s.giantswarm.io/app-icons/falco/2/icon_dark.svg
 maintainers:
 - name: Giant Swarm applications team
   url: https://github.com/giantswarm/falco-app
-name: falco-app
+name: falco
 sources:
 - https://github.com/giantswarm/falco-app
 version: [[ .Version ]]
