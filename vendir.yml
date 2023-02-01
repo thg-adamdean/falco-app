@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+- path: helm/falco/charts
+  contents:
+  - path: .
+    git:
+      url: https://github.com/giantswarm/falco-charts-upstream
+      ref: v0.36.0
+    includePaths:
+      - falco/**
+      - falcosidekick/**
+      - falco-exporter/**
